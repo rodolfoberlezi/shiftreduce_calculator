@@ -21,17 +21,22 @@ public class ShiftReduceMine {
 
     public String pilha_esquerda = "";
     public String pilha_direita = "i+i";
-    private final ArrayList<Float> pilha_o = new ArrayList();
-    private final ArrayList<Float> pilha_v = new ArrayList();
+    private final ArrayList<Float> pilha_ve = new ArrayList();
+    private final ArrayList<Float> pilha_vd = new ArrayList();
 
     public void transfere() {
         if (pilha_direita.length() > 0) {
             pilha_esquerda = pilha_esquerda + pilha_direita.substring(0, 1);
             pilha_direita = pilha_direita.substring(1);
-
-           //transfere da pilha de float da direita para a pilha e float d esquerda
+            if ((pilha_esquerda.endsWith("i"))) {
+                pilha_ve.add(pilha_vd.remove(0));
+            }
         }
 
+    }
+
+    public void transloca_numero() {
+        pilha_ve.add(pilha_vd.remove(0));
     }
 
     public int eh_inicio_regra() {
@@ -62,6 +67,9 @@ public class ShiftReduceMine {
             for (int i = 1; i < regra.length; i++) {
                 if (expressao.equals(regra[i])) {
                     resposta = regra[0];
+                    if (expressao.length() > 2) {
+                        calcula_expresaso(expressao);
+                    }
                 }
             }
         }
@@ -76,8 +84,6 @@ public class ShiftReduceMine {
             if (!reducao.equals("")) {
                 pilha_esquerda = pilha_esquerda.substring(0, cont) + reducao;
                 resposta = true;
-                //if pilha_esquerda.substring(cont) > 1               
-                //pilha_esquerda.substring(cont)[1] = +operacao  
             }
             cont++;
         }
@@ -105,22 +111,61 @@ public class ShiftReduceMine {
         }
     }
 
+    public void calcula_expresaso(String expressao) {
+        Float valor_1 = pilha_ve.remove(pilha_ve.size() - 1);
+        System.out.println(valor_1);
+        Float valor_2 = pilha_ve.remove(pilha_ve.size() - 1);
+        System.out.println(valor_2);
+        switch (expressao.charAt(1)) {
+            case '+':
+                pilha_ve.add(valor_1 + valor_2);
+                break;
+            case '-':
+                pilha_ve.add(valor_1 - valor_2);
+                break;
+            case '/':
+                pilha_ve.add(valor_1 / valor_2);
+                break;
+            case '*':
+                pilha_ve.add(valor_1 * valor_2);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void valor_expressao(String expressao) {
+        String[] vetor = expressao.split("");
+        for (String string : vetor) {
+            if (Character.isDigit(string.charAt(0))) {
+                pilha_vd.add(Float.valueOf(string));
+            }
+        }
+
+    }
+
     public static void main(String[] args) {
 
-        Lexico lexico = new Lexico("3/(2+1)");
-        String expressao = lexico.analise();
+        String expressao = "4-6/3";
+        Lexico lexico = new Lexico(expressao);
+        String simbolos = lexico.analise();
         lexico.resultado_analise();
         if (expressao.length() > 0) {
             ShiftReduceMine sr = new ShiftReduceMine();
 
             sr.pilha_esquerda = "";
-            sr.pilha_direita = expressao;
+            sr.pilha_direita = simbolos;
+            sr.valor_expressao(expressao);
+            System.out.println(expressao);
 
             if (sr.shiftreduce()) {
                 System.out.println("Aceita palavra");
             } else {
                 System.out.println("Recusa palavra");
             }
+
+            System.out.println(sr.pilha_ve);
+            System.out.println(sr.pilha_vd);
 
         }
 

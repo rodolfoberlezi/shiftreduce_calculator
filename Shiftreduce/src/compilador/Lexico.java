@@ -16,11 +16,13 @@ public class Lexico {
     private String pilha_fonte = "";
     private int pilha_valores = 0;
 //    private String pilha_operacao = "";
-    private final ArrayList<String> pilha_o = new ArrayList();
-    private final ArrayList<String> pilha_v = new ArrayList();
+    private ArrayList<String> pilha_o = new ArrayList();
+    private ArrayList<String> pilha_v = new ArrayList();
 
     public Lexico(String f) {
         this.pilha_fonte = f;
+//        this.pilha_v.add(reconhece_numero());
+//        this.pilha_o.add(reconhece_operador());        
     }
 
     public String reconhece_numero() {
