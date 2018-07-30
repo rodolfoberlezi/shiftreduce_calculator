@@ -34,7 +34,7 @@ public class ShiftReduceMine {
         }
 
     }
-
+    
     public int eh_inicio_regra() {
         if (pilha_direita.length() == 0) {
             return -1;
@@ -109,10 +109,9 @@ public class ShiftReduceMine {
 
     public void calcula_expresaso(String expressao) {
         Float valor_1 = pilha_ve.remove(pilha_ve.size() - 1);
-        System.out.println(valor_1);
-        //tratar parentese
+        //System.out.println(valor_1);
         Float valor_2 = pilha_ve.remove(pilha_ve.size() - 1);
-        System.out.println(valor_2);
+        //System.out.println(valor_2);
         switch (expressao.charAt(1)) {
             case '+':
                 pilha_ve.add(valor_1 + valor_2);
@@ -147,17 +146,17 @@ public class ShiftReduceMine {
 
     public static void main(String[] args) {
 
-        String expressao = "4-6/3";
+        String expressao = "5+4/2-4*3";
         Lexico lexico = new Lexico(expressao);
         String simbolos = lexico.analise();
-        //lexico.resultado_analise();
+        lexico.resultado_analise();
         if (expressao.length() > 0) {
             ShiftReduceMine sr = new ShiftReduceMine();
 
             sr.pilha_esquerda = "";
             sr.pilha_direita = simbolos;
             sr.valor_expressao(expressao);
-            System.out.println(expressao);
+//            System.out.println(expressao);
 
             if (sr.shiftreduce()) {
                 System.out.println("Aceita palavra");
@@ -166,7 +165,7 @@ public class ShiftReduceMine {
             }
 
             System.out.println(sr.pilha_ve);
-            System.out.println(sr.pilha_vd);
+//            System.out.println(sr.pilha_vd);
 
         }
 

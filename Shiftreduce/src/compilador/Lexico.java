@@ -21,8 +21,6 @@ public class Lexico {
 
     public Lexico(String f) {
         this.pilha_fonte = f;
-//        this.pilha_v.add(reconhece_numero());
-//        this.pilha_o.add(reconhece_operador());        
     }
 
     public String reconhece_numero() {
@@ -39,7 +37,6 @@ public class Lexico {
                 if (s.charAt(0) >= '0' && s.charAt(0) <= '9') {
                     estado = 1;
                     pilha_v.add(s);
-//                    pilha_valores = pilha_valores + s;
                     resultado = resultado + s;
                     i++;
                 } else {
@@ -49,7 +46,6 @@ public class Lexico {
                 if (s.charAt(0) >= '0' && s.charAt(0) <= '9') {
                     estado = 2;
                     pilha_v.add(s);
-//                    pilha_valores = pilha_valores + s;
                     resultado = resultado + s;
                     i++;
                 } else if (s.equals(".")) {
@@ -63,7 +59,6 @@ public class Lexico {
                 if (s.charAt(0) >= '0' && s.charAt(0) <= '9') {
                     estado = 3;
                     pilha_v.add(s);
-//                    pilha_valores = pilha_valores + s;
                     resultado = resultado + s;
                     i++;
                 } else {
@@ -73,7 +68,6 @@ public class Lexico {
                 if (s.charAt(0) >= '0' && s.charAt(0) <= '9') {
                     estado = 4;
                     pilha_v.add(s);
-//                    pilha_valores = pilha_valores + s;
                     resultado = resultado + s;
                     i++;
                 } else {
@@ -97,7 +91,6 @@ public class Lexico {
         if (s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") || s.equals("(") || s.equals(")")) {
             resultado = resultado + s;
             pilha_o.add(s);
-//            pilha_operacao = pilha_operacao + s;
             pilha_fonte = pilha_fonte.substring(1);
             return s;
         } else {
@@ -106,8 +99,6 @@ public class Lexico {
     }
 
     public int retorna_valor(int pos) {
-//        String aux = pilha_valores.substring(pilha_valores.length() - pos, pilha_valores.length());
-//        pilha_valores = pilha_valores.substring(pilha_valores.length() - pos, pilha_valores.length());
         String aux = pilha_v.get(pos);
         int k = Integer.valueOf(aux);
         return k;
@@ -117,7 +108,7 @@ public class Lexico {
         int tam_pilha = size;
         int resultado = 0;
         for (int j = pilha_o.size(); j > 0; j--) {
-            String s = pilha_o.get(j-1);
+            String s = pilha_o.get(j - 1);
             switch (s) {
                 case "*":
                     resultado = retorna_valor(tam_pilha) * retorna_valor(tam_pilha - 1);
@@ -139,9 +130,9 @@ public class Lexico {
                     tam_pilha--;
                     pilha_v.add(tam_pilha, Integer.toString(resultado));
                     break;
-                case "(":                    
+                case "(":
                     break;
-                case ")":                   
+                case ")":
                     break;
                 default:
                     break;
@@ -150,8 +141,8 @@ public class Lexico {
         return resultado;
     }
 
-    public void resultado_analise() {        
-            System.out.println("Resultado: " + calcula(pilha_o.size()));        
+    public void resultado_analise() {
+        System.out.println("Resultado: " + calcula(pilha_o.size()));
     }
 
     public String analise() {
