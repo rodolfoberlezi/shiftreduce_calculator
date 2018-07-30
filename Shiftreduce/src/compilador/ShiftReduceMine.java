@@ -35,10 +35,6 @@ public class ShiftReduceMine {
 
     }
 
-    public void transloca_numero() {
-        pilha_ve.add(pilha_vd.remove(0));
-    }
-
     public int eh_inicio_regra() {
         if (pilha_direita.length() == 0) {
             return -1;
@@ -114,6 +110,7 @@ public class ShiftReduceMine {
     public void calcula_expresaso(String expressao) {
         Float valor_1 = pilha_ve.remove(pilha_ve.size() - 1);
         System.out.println(valor_1);
+        //tratar parentese
         Float valor_2 = pilha_ve.remove(pilha_ve.size() - 1);
         System.out.println(valor_2);
         switch (expressao.charAt(1)) {
@@ -128,6 +125,10 @@ public class ShiftReduceMine {
                 break;
             case '*':
                 pilha_ve.add(valor_1 * valor_2);
+                break;
+            case '(':
+                break;
+            case ')':
                 break;
             default:
                 break;
@@ -149,7 +150,7 @@ public class ShiftReduceMine {
         String expressao = "4-6/3";
         Lexico lexico = new Lexico(expressao);
         String simbolos = lexico.analise();
-        lexico.resultado_analise();
+        //lexico.resultado_analise();
         if (expressao.length() > 0) {
             ShiftReduceMine sr = new ShiftReduceMine();
 
