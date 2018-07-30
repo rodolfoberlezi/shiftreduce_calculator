@@ -15,7 +15,6 @@ public class Lexico {
 
     private String pilha_fonte = "";
     private int pilha_valores = 0;
-//    private String pilha_operacao = "";
     private ArrayList<String> pilha_o = new ArrayList();
     private ArrayList<String> pilha_v = new ArrayList();
 
@@ -75,7 +74,7 @@ public class Lexico {
                 }
             } else if (estado == 4) {
                 pilha_fonte = pilha_fonte.substring(1);
-                System.out.println("Pilha Fonte: " + pilha_fonte);
+//                System.out.println("Pilha Fonte: " + pilha_fonte);
 //                System.out.println("Pilha Valores: " + pilha_v);
                 return resultado;
             }

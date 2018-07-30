@@ -108,6 +108,8 @@ public class ShiftReduceMine {
     }
 
     public void calcula_expresaso(String expressao) {
+        if(expressao.charAt(0)=='(')
+            return;
         Float valor_1 = pilha_ve.remove(pilha_ve.size() - 1);
         //System.out.println(valor_1);
         Float valor_2 = pilha_ve.remove(pilha_ve.size() - 1);
@@ -146,10 +148,10 @@ public class ShiftReduceMine {
 
     public static void main(String[] args) {
 
-        String expressao = "5+4/2-4*3";
+        String expressao = "(5+4)/2";
         Lexico lexico = new Lexico(expressao);
         String simbolos = lexico.analise();
-        lexico.resultado_analise();
+        //lexico.resultado_analise();
         if (expressao.length() > 0) {
             ShiftReduceMine sr = new ShiftReduceMine();
 
